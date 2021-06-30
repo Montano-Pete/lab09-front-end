@@ -1,6 +1,6 @@
 import request from 'superagent';
 
-const URL = 'https://shielded-castle-33534.herokuapp.com/';
+const URL = 'https://shielded-castle-33534.herokuapp.com';
 
 export async function getAllFruits() {
     const { body } = await request.get(`${URL}/fruits`);

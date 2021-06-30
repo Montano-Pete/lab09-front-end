@@ -15,7 +15,7 @@ export default class App extends Component {
     return (
       <Router>
         <div>
-          <h2>Header</h2>
+          <h2>Beautiful Fruits abound!</h2>
           <Switch>
             <Route 
               path="/" 
