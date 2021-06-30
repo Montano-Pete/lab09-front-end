@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import './App.css';
 import ListPage from './ListPage.js';
 import {
@@ -10,6 +10,7 @@ import {
   useParams
 } from "react-router-dom";
 import CreatePage from './CreatePage.js';
+import DetailPage from './DetailPage.js';
 
 export default class App extends Component {
   render() {
@@ -20,18 +21,12 @@ export default class App extends Component {
           <p><Link to="/create">Add Fruit!</Link></p>
           <p><Link to="/">Home</Link></p>
           <Switch>
-            <Route 
-              path="/" 
-              exact
-              render={(routerProps) => <ListPage {...routerProps} />} 
-            />          
-          </Switch>
-          <Switch>
-            <Route 
-              path="/create" 
-              exact
-              render={(routerProps) => <CreatePage {...routerProps} />} 
-            />          
+            <Route path="/" exact render={(routerProps) => <ListPage {...routerProps} />} 
+            />
+            <Route path="/fruits/:id" exact render={(routerProps) => <DetailPage {...routerProps} />} 
+            />
+            <Route path="/create" exact render={(routerProps) => <CreatePage {...routerProps} />} 
+            />
           </Switch>
         </div>
       </Router>

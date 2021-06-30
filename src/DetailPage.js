@@ -1,12 +1,27 @@
 import React, { Component } from 'react';
-import { createFruit } from './fetch-utils.js';
+import { getAllCategories, getOneFruit, updateFruit } from './fetch-utils.js';
 
-export default class CreatePage extends Component {
+export default class DetailPage extends Component {
 
     state = {
         name: '',
         price: 0,
+        categories: [],
         category_id: 1
+    }
+
+    componentDidMount = async () => {
+        const id = this.props.match.params.id;
+
+        const fruit = await getOneFruit(id);
+        const categories = await getAllCategories();
+
+        this.setState({
+            name: fruit.name,
+            price: fruit.price,
+            categories: categories,
+            category_id: fruit.category_id
+        })
     }
 
     handleNameChange = e => {
@@ -24,7 +39,7 @@ export default class CreatePage extends Component {
     handleSubmit = async e => {
         e.preventDefault();
 
-        await createFruit({
+        await updateFruit(this.props.match.params.id, {
             name: this.state.name,
             price: this.state.price,
             category_id: this.state.category_id
@@ -36,23 +51,25 @@ export default class CreatePage extends Component {
     render() {
         return (
             <div>
-                <h2>Add Fruit</h2>
+                <h2>Update Fruit</h2>
                 <form onSubmit={this.handleSubmit}>
                     <label>
                         Name
-                        <input onChange={this.handleNameChange}/>
+                        <input value={this.state.name} onChange={this.handleNameChange} />
                     </label>
                     <label>
                         Price
-                        <input onChange={this.handlePriceChange}/>
+                        <input value={this.state.price} type='number' onChange={this.handlePriceChange} />
                     </label>
                     <label>
                         Category
                         <select onChange={this.handleCategoryChange}>
-                            <option value="1">Tree</option>
-                            <option value="2">Ground</option>
-                            <option value="3">Vine</option>
-                            <option value="4">Cactus</option>
+                            {this.state.categories.map(category =>
+                                <option
+                                    selected={category.id === this.state.category_id}
+                                    value={category.id}>
+                                    {category.category}
+                                </option>)}
                         </select>
                     </label>
                     <button>Add!</button>
