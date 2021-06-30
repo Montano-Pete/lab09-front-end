@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getAllCategories, getOneFruit, updateFruit } from './fetch-utils.js';
+import { deleteFruit, getAllCategories, getOneFruit, updateFruit } from './fetch-utils.js';
 
 export default class DetailPage extends Component {
 
@@ -48,6 +48,11 @@ export default class DetailPage extends Component {
         this.props.history.push('/')
     }
 
+    handleDelete = async e => {
+        await deleteFruit(this.props.match.params.id);
+        this.props.history.push('/');
+    }
+
     render() {
         return (
             <div>
@@ -72,7 +77,8 @@ export default class DetailPage extends Component {
                                 </option>)}
                         </select>
                     </label>
-                    <button>Add!</button>
+                    <button>Update!</button>
+                    <button onClick={this.handleDelete}>Delete</button>
                 </form>
             </div>
         )
