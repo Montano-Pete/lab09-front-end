@@ -2,24 +2,18 @@
 import React, { Component } from 'react';
 import './App.css';
 import ListPage from './ListPage.js';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useParams
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import CreatePage from './CreatePage.js';
 import DetailPage from './DetailPage.js';
+import Header from './Header.js';
 
 export default class App extends Component {
   render() {
     return (
       <Router>
         <div>
+          <Header />
           <h2>Beautiful Fruits abound!</h2>
-          <p><Link to="/create">Add Fruit!</Link></p>
-          <p><Link to="/">Home</Link></p>
           <Switch>
             <Route path="/" exact render={(routerProps) => <ListPage {...routerProps} />} 
             />
