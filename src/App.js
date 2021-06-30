@@ -1,25 +1,30 @@
-import logo from './logo.svg';
+/* eslint-disable no-unused-vars */
+import React, { Component } from 'react'
 import './App.css';
+import ListPage from './ListPage.js';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useParams
+} from "react-router-dom";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default class App extends Component {
+  render() {
+    return (
+      <Router>
+        <div>
+          <h2>Header</h2>
+          <Switch>
+            <Route 
+              path="/" 
+              exact
+              render={(routerProps) => <ListPage {...routerProps} />} 
+            />          
+          </Switch>
+        </div>
+      </Router>
+    );
+  }
 }
-
-export default App;
